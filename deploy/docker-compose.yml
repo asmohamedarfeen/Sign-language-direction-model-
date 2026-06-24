@@ -1,0 +1,42 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: signspeak-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: signspeak
+      POSTGRES_PASSWORD: signspeak_password
+      POSTGRES_DB: signspeak
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ../db/schema/schema.sql:/docker-entrypoint-initdb.d/01_schema.sql
+      - ../db/seed/seed_data.sql:/docker-entrypoint-initdb.d/02_seed.sql
+    ports:
+      - "5432:5432"
+
+  backend:
+    build:
+      context: ..
+      dockerfile: deploy/docker/Dockerfile.backend
+    container_name: signspeak-backend
+    restart: always
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://signspeak:signspeak_password@db:5432/signspeak
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+  frontend:
+    build:
+      context: ..
+      dockerfile: deploy/docker/Dockerfile.frontend
+    container_name: signspeak-frontend
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:
