@@ -1,0 +1,21 @@
+Test Accuracy: 100.00%
+Total Samples: 5000
+Features Dimension: 83
+Classes: 10
+
+              precision    recall  f1-score   support
+
+       CLEAR     1.0000    1.0000    1.0000       100
+        GOOD     1.0000    1.0000    1.0000       100
+       HELLO     1.0000    1.0000    1.0000       100
+        HELP     1.0000    1.0000    1.0000       100
+  I_LOVE_YOU     1.0000    1.0000    1.0000       100
+          NO     1.0000    1.0000    1.0000       100
+       PEACE     1.0000    1.0000    1.0000       100
+        STOP     1.0000    1.0000    1.0000       100
+   THANK_YOU     1.0000    1.0000    1.0000       100
+         YES     1.0000    1.0000    1.0000       100
+
+    accuracy                         1.0000      1000
+   macro avg     1.0000    1.0000    1.0000      1000
+weighted avg     1.0000    1.0000    1.0000      1000
