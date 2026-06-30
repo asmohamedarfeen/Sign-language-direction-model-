@@ -5,7 +5,9 @@ import { VocabularyPage } from './pages/VocabularyPage';
 import { HistoryPage } from './pages/HistoryPage';
 
 export const App: React.FC = () => {
-  const [currentTab, setCurrentTab] = useState<'studio' | 'dictionary' | 'history'>('studio');
+  const urlTab = typeof window !== 'undefined' ? new URLSearchParams(window.location.search).get('tab') : null;
+  const initialTab = (urlTab === 'dictionary' || urlTab === 'history') ? urlTab : 'studio';
+  const [currentTab, setCurrentTab] = useState<'studio' | 'dictionary' | 'history'>(initialTab);
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans">
